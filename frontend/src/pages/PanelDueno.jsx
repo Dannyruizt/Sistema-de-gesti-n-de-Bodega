@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/PanelDueno.css';
 
 // Aquí se llamará a panelService.js para traer datos reales
@@ -78,28 +78,15 @@ function PanelDueno() {
 
   //ahora si, el html pro
   return (
-    <div className="dueno-panel">
-      <NavBar role="Dueño" />
-
-      <main className="dueno-panel-content">
-        <header className="dueno-panel-header">
-          <div className="dueno-panel-header-left">
-            <div className="dueno-panel-header-icon">
-              <Icon type="shield" size={22} />
-            </div>
-            <div>
-              <h1 className="dueno-panel-title">Panel del Dueño</h1>
-              <p className="dueno-panel-subtitle">Vista financiera y gestión completa del sistema</p>
-            </div>
-          </div>
-          <div className="dueno-panel-header-right">
-            <span className="dueno-panel-date">Jueves, 25 de Junio 2026</span>
-            <button className="dueno-panel-secondary-button">
-              <Icon type="shield" size={14} /> Ver roles y permisos
-            </button>
-          </div>
-        </header>
-
+    <Layout role="Dueño" title="Panel del Dueño" subtitle="Vista financiera y gestión completa del sistema">
+     <div className="dueno-panel-content">
+       {/* la fecha y el botón "Ver roles y permisos" que antes vivían en el header pasan a una fila de acciones */}
+       <div className="dueno-panel-actions-row">
+         <span className="dueno-panel-date">Jueves, 25 de Junio 2026</span>
+         <button className="dueno-panel-secondary-button">
+           <Icon type="shield" size={14} /> Ver roles y permisos
+         </button>
+       </div>
         <section className="dueno-panel-alert-banner">
           <div className="dueno-panel-alert-left">
             <div className="dueno-panel-alert-icon">
@@ -247,8 +234,8 @@ function PanelDueno() {
             ))}
           </div>
         </section>
-      </main>
-    </div>
+        </div>
+      </Layout>
   );
 }
 

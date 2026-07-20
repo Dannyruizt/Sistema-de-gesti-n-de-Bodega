@@ -1,0 +1,17 @@
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.layout-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.layout-content {
+  flex: 1;
+  overflow-y: auto;
+}

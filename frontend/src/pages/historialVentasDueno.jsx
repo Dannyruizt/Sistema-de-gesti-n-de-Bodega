@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useMemo } from 'react';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/HistorialVentasDueno.css';
 
 // Aquí se llamará a ventaService.js (o como se llame) para traer los datos guardados en la base de datos
@@ -48,24 +48,16 @@ function HistorialVentasDueno() {
 
   //html pro
   return (
-    <div className="historial-container">
-      <NavBar role="Dueño" />
-
-      <main className="historial-content">
-        <header className="historial-header">
-          <div>
-            <h1 className="historial-title">Historial de Venta</h1>
-            <p className="historial-subtitle">Registro de todas las transacciones</p>
-          </div>
-          <button className="historial-history-button">
-            <button className="historial-history-button" onClick={() => navigate('/historico')}></button>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 8v4l3 3M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" />
-            </svg>
-            Ver Histórico
-          </button>
-        </header>
-
+    <Layout role="Dueño" title="Historial de Venta" subtitle="Registro de todas las transacciones">
+     <div className="historial-content">
+       <div className="historial-actions-row">
+         <button className="historial-history-button" onClick={() => navigate('/historico')}>
+           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+             <path d="M12 8v4l3 3M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" />
+           </svg>
+           Ver Histórico
+         </button>
+       </div>
         <section className="historial-summary-grid">
           <div className="historial-summary-card">
             <div className="historial-summary-icon historial-summary-icon-green">
@@ -164,8 +156,8 @@ function HistorialVentasDueno() {
             Mostrando {ventasFiltradas.length} de {ventas.length} ventas
           </div>
         </section>
-      </main>
-    </div>
+        </div>
+        </Layout>
   );
 }
 

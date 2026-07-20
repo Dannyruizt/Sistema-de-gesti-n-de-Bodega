@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/DashboardEncargado.css';
 
 
@@ -35,73 +35,72 @@ function StatIcon({ type }) {
 }
 
 function DashboardEncargado() {
-  const [activeLink, setActiveLink] = useState('Dashboard');
+  //const [activeLink, setActiveLink] = useState('Dashboard');
 
   useEffect(() => {
     // Aquí se llamará a dashboardService.js
     // Ejemplo: dashboardService.getResumenEncargado().then(...)
   }, []);
 
-  return (
-    <div className="encargado-dashboard">
-      <NavBar role="Encargado" />
-
-      <main className="encargado-content">
-        <header className="encargado-header">
-          <h1 className="encargado-title">Dashboard</h1>
-          <p className="encargado-subtitle">Resumen general de inventario</p>
-        </header>
-
-        <section className="encargado-stats-grid">
-          {STAT_CARDS.map((card) => (
-            <div className="encargado-stat-card" key={card.label}>
-              <div className="encargado-stat-icon">
-                <StatIcon type={card.icon} />
-              </div>
-              <div>
-                <p className="encargado-stat-value">{card.value}</p>
-                <p className="encargado-stat-label">{card.label}</p>
-              </div>
+ return (
+    <Layout role="Encargado" title="Dashboard" subtitle="Resumen general de inventario">
+      <div className="encargado-content"></div>
+      
+      <section className="encargado-stats-grid">
+        {STAT_CARDS.map((card) => (
+          <div className="encargado-stat-card" key={card.label}>
+            <div className="encargado-stat-icon">
+              <StatIcon type={card.icon} />
             </div>
-          ))}
-        </section>
+            <div>
+              <p className="encargado-stat-value">{card.value}</p>
+              <p className="encargado-stat-label">{card.label}</p>
+            </div>
+          </div>
+        ))}
+      </section>
 
-        <section className="encargado-alerts-section">
-          <h2 className="encargado-alerts-title">Alerta de inventario</h2>
+      <section className="encargado-alerts-section">
+        <h2 className="encargado-alerts-title">Alerta de inventario</h2>
 
-          <div className="encargado-table-wrapper">
-            <table className="encargado-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Producto</th>
-                  <th>Categoría</th>
-                  <th>Stock Actual</th>
-                  <th>Estado</th>
+        <div className="encargado-table-wrapper">
+          <table className="encargado-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Stock Actual</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {INVENTORY_ALERTS.map((item) => (
+                <tr key={item.id} className="encargado-row-alert">
+                  <td>{item.id}</td>
+                  <td>{item.producto}</td>
+                  <td>{item.categoria}</td>
+                  <td className="encargado-stock-value">{item.stock}</td>
+                  <td>
+                    <span className="encargado-badge">Bajo</span>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {INVENTORY_ALERTS.map((item) => (
-                  <tr key={item.id} className="encargado-row-alert">
-                    <td>{item.id}</td>
-                    <td>{item.producto}</td>
-                    <td>{item.categoria}</td>
-                    <td className="encargado-stock-value">{item.stock}</td>
-                    <td>
-                      <span className="encargado-badge">Bajo</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-          <div className="encargado-alerts-footer"> 
-            <button className="encargado-link-button">Ver todos los productos →</button> 
-          </div>
-        </section> 
-      </main> 
-    </div> //el boton de arriba debería llevar a la página de gestiónProductos, porque de inventario no hay, creo
+        <div className="encargado-alerts-footer"> 
+          {/* 3. Agregamos el onClick para redirigir a tu vista de productos */}
+          <button 
+            className="encargado-link-button" 
+            onClick={() => navigate('/productos')} // Cambia '/productos' por la ruta real que definiste en tus AppRoutes
+          >
+            Ver todos los productos →
+          </button> 
+        </div>
+      </section> 
+      </Layout>
   );
 }
 

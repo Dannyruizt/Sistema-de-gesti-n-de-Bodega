@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
 import '../styles/pages/DashboardDueno.css';
 
@@ -92,14 +93,8 @@ function DashboardDueno() {
 
   // si, ya sé que es
   return (
-    <div className="dueno-dashboard">
-      <NavBar role="Dueño" />
-
-      <main className="dueno-content">
-        <header className="dueno-header">
-          <h1 className="dueno-title">Dashboard</h1>
-          <p className="dueno-subtitle">Resumen general de inventario</p>
-        </header>
+    <Layout role="Dueño" title="Dashboard" subtitle="Resumen general de inventario">
+       <div className="dueno-content">
 
         <section className="dueno-stats-grid">
           {STAT_CARDS.map((card) => (
@@ -231,8 +226,8 @@ function DashboardDueno() {
             <button className="dueno-link-button">Ver todos los productos →</button>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

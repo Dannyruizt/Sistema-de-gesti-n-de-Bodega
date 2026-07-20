@@ -8,21 +8,27 @@
   padding: 0;
 }
 
+.venta-actions-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 26px 0 26px;
+}
+
 /* Header */
-.venta-header {
+/*.venta-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 33px 26px 16px 26px;
   border-bottom: 0.8px solid var(--app-border);
 }
-
+*/
 .venta-header-left {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
+/*
 .venta-header-icon {
   width: 32px;
   height: 32px;
@@ -39,7 +45,7 @@
   font-weight: 500;
   color: #0a0a0a;
   margin: 0;
-}
+}*/
 
 .venta-history-button {
   display: flex;

@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/GestionProductos.css';
 
 // Aquí se llamará a productoService.js para traer el listado real
@@ -117,231 +117,224 @@ function GestionProductos() {
     // Ejemplo: await productoService.eliminar(id);
     setProductos((prev) => prev.filter((p) => p.id !== id));
   };
-  
+
 ////////////////////////////////
-  return (
-    <div className="productos-container">
-       <NavBar role="Encargado" />
+ return (
+  <Layout role="Encargado" title="Gestión de Productos" subtitle="Listado e Inventario">
+    <div className="productos-content"></div>
 
-      <main className="productos-content">
-        <header className="productos-header">
-          <h1 className="productos-title">Gestión de Productos</h1>
-          <p className="productos-subtitle">Listado e Inventario</p>
-        </header>
+    <section className="productos-toolbar">
+      <div className="productos-search-wrapper">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" className="productos-search-icon">
+          <circle cx="11" cy="11" r="8" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          className="productos-search-input"
+          placeholder="Buscar por nombre o ID..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
+      </div>
 
-        <section className="productos-toolbar">
-          <div className="productos-search-wrapper">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" className="productos-search-icon">
-              <circle cx="11" cy="11" r="8" />
-              <path d="M21 21l-4.35-4.35" />
-            </svg>
-            <input
-              type="text"
-              className="productos-search-input"
-              placeholder="Buscar por nombre o ID..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-            />
+      <select
+        className="productos-filter-select"
+        value={categoriaFiltro}
+        onChange={(e) => setCategoriaFiltro(e.target.value)}
+      >
+        <option value="">Todas las categorías</option>
+        {categorias.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
+
+      <select
+        className="productos-filter-select"
+        value={estadoFiltro}
+        onChange={(e) => setEstadoFiltro(e.target.value)}
+      >
+        <option value="">Todos los estados</option>
+        {ESTADOS.map((estado) => (
+          <option key={estado} value={estado}>
+            {estado}
+          </option>
+        ))}
+      </select>
+
+      <button className="productos-new-button" onClick={handleAbrirNuevo}>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        Nuevo Producto
+      </button>
+    </section>
+
+    <section className="productos-table-wrapper">
+      <table className="productos-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock Actual</th>
+            <th>Estado</th>
+            <th className="productos-th-acciones">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {productosFiltrados.map((p) => {
+            const stockBajo = p.stock <= UMBRAL_STOCK_BAJO;
+            return (
+              <tr key={p.id} className={stockBajo ? 'productos-row-bajo-stock' : ''}>
+                <td>{p.id}</td>
+                <td className="productos-cell-nombre">
+                  {p.nombre}
+                  {stockBajo && (
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#d08700" strokeWidth="2">
+                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01" />
+                    </svg>
+                  )}
+                </td>
+                <td>{p.categoria}</td>
+                <td>${p.precio.toFixed(2)}</td>
+                <td className={stockBajo ? 'productos-stock-bajo' : 'productos-stock-normal'}>
+                  {p.stock}
+                </td>
+                <td>
+                  <span className={`productos-badge productos-badge-${p.estado.toLowerCase()}`}>
+                    {p.estado}
+                  </span>
+                </td>
+                <td className="productos-td-acciones">
+                  <button
+                    className="productos-action-button"
+                    onClick={() => handleAbrirEditar(p)}
+                    aria-label="Editar producto"
+                  >
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                  </button>
+                  <button
+                    className="productos-action-button productos-action-danger"
+                    onClick={() => handleEliminar(p.id)}
+                    aria-label="Eliminar producto"
+                  >
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </section>
+
+    {mostrarModal && (
+      <div className="productos-modal-overlay" onClick={handleCerrarModal}>
+        <div className="productos-modal" onClick={(e) => e.stopPropagation()}>
+          <h2 className="productos-modal-title">
+            {productoEditando ? 'Editar Producto' : 'Nuevo Producto'}
+          </h2>
+
+          <div className="productos-modal-form">
+            <div className="productos-form-field">
+              <label className="productos-form-label" htmlFor="nombre">
+                Nombre
+              </label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                className="productos-form-input"
+                value={formulario.nombre}
+                onChange={handleChangeFormulario}
+              />
+            </div>
+
+            <div className="productos-form-field">
+              <label className="productos-form-label" htmlFor="categoria">
+                Categoría
+              </label>
+              <input
+                type="text"
+                id="categoria"
+                name="categoria"
+                className="productos-form-input"
+                value={formulario.categoria}
+                onChange={handleChangeFormulario}
+              />
+            </div>
+
+            <div className="productos-form-row">
+              <div className="productos-form-field">
+                <label className="productos-form-label" htmlFor="precio">
+                  Precio
+                </label>
+                <input
+                  type="number"
+                  id="precio"
+                  name="precio"
+                  step="0.01"
+                  className="productos-form-input"
+                  value={formulario.precio}
+                  onChange={handleChangeFormulario}
+                />
+              </div>
+              <div className="productos-form-field">
+                <label className="productos-form-label" htmlFor="stock">
+                  Stock
+                </label>
+                <input
+                  type="number"
+                  id="stock"
+                  name="stock"
+                  className="productos-form-input"
+                  value={formulario.stock}
+                  onChange={handleChangeFormulario}
+                />
+              </div>
+            </div>
+
+            <div className="productos-form-field">
+              <label className="productos-form-label" htmlFor="estado">
+                Estado
+              </label>
+              <select
+                id="estado"
+                name="estado"
+                className="productos-form-input"
+                value={formulario.estado}
+                onChange={handleChangeFormulario}
+              >
+                {ESTADOS.map((estado) => (
+                  <option key={estado} value={estado}>
+                    {estado}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <select
-            className="productos-filter-select"
-            value={categoriaFiltro}
-            onChange={(e) => setCategoriaFiltro(e.target.value)}
-          >
-            <option value="">Todas las categorías</option>
-            {categorias.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-
-          <select
-            className="productos-filter-select"
-            value={estadoFiltro}
-            onChange={(e) => setEstadoFiltro(e.target.value)}
-          >
-            <option value="">Todos los estados</option>
-            {ESTADOS.map((estado) => (
-              <option key={estado} value={estado}>
-                {estado}
-              </option>
-            ))}
-          </select>
-
-          <button className="productos-new-button" onClick={handleAbrirNuevo}>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 5v14M5 12h14" />
-            </svg>
-            Nuevo Producto
-          </button>
-        </section>
-
-        <section className="productos-table-wrapper">
-          <table className="productos-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Precio</th>
-                <th>Stock Actual</th>
-                <th>Estado</th>
-                <th className="productos-th-acciones">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productosFiltrados.map((p) => {
-                const stockBajo = p.stock <= UMBRAL_STOCK_BAJO;
-                return (
-                  <tr key={p.id} className={stockBajo ? 'productos-row-bajo-stock' : ''}>
-                    <td>{p.id}</td>
-                    <td className="productos-cell-nombre">
-                      {p.nombre}
-                      {stockBajo && (
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#d08700" strokeWidth="2">
-                          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01" />
-                        </svg>
-                      )}
-                    </td>
-                    <td>{p.categoria}</td>
-                    <td>${p.precio.toFixed(2)}</td>
-                    <td className={stockBajo ? 'productos-stock-bajo' : 'productos-stock-normal'}>
-                      {p.stock}
-                    </td>
-                    <td>
-                      <span className={`productos-badge productos-badge-${p.estado.toLowerCase()}`}>
-                        {p.estado}
-                      </span>
-                    </td>
-                    <td className="productos-td-acciones">
-                      <button
-                        className="productos-action-button"
-                        onClick={() => handleAbrirEditar(p)}
-                        aria-label="Editar producto"
-                      >
-                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                        </svg>
-                      </button>
-                      <button
-                        className="productos-action-button productos-action-danger"
-                        onClick={() => handleEliminar(p.id)}
-                        aria-label="Eliminar producto"
-                      >
-                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z" />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-      </main>
-
-      {mostrarModal && (
-        <div className="productos-modal-overlay" onClick={handleCerrarModal}>
-          <div className="productos-modal" onClick={(e) => e.stopPropagation()}>
-            <h2 className="productos-modal-title">
-              {productoEditando ? 'Editar Producto' : 'Nuevo Producto'}
-            </h2>
-
-            <div className="productos-modal-form">
-              <div className="productos-form-field">
-                <label className="productos-form-label" htmlFor="nombre">
-                  Nombre
-                </label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  className="productos-form-input"
-                  value={formulario.nombre}
-                  onChange={handleChangeFormulario}
-                />
-              </div>
-
-              <div className="productos-form-field">
-                <label className="productos-form-label" htmlFor="categoria">
-                  Categoría
-                </label>
-                <input
-                  type="text"
-                  id="categoria"
-                  name="categoria"
-                  className="productos-form-input"
-                  value={formulario.categoria}
-                  onChange={handleChangeFormulario}
-                />
-              </div>
-
-              <div className="productos-form-row">
-                <div className="productos-form-field">
-                  <label className="productos-form-label" htmlFor="precio">
-                    Precio
-                  </label>
-                  <input
-                    type="number"
-                    id="precio"
-                    name="precio"
-                    step="0.01"
-                    className="productos-form-input"
-                    value={formulario.precio}
-                    onChange={handleChangeFormulario}
-                  />
-                </div>
-                <div className="productos-form-field">
-                  <label className="productos-form-label" htmlFor="stock">
-                    Stock
-                  </label>
-                  <input
-                    type="number"
-                    id="stock"
-                    name="stock"
-                    className="productos-form-input"
-                    value={formulario.stock}
-                    onChange={handleChangeFormulario}
-                  />
-                </div>
-              </div>
-
-              <div className="productos-form-field">
-                <label className="productos-form-label" htmlFor="estado">
-                  Estado
-                </label>
-                <select
-                  id="estado"
-                  name="estado"
-                  className="productos-form-input"
-                  value={formulario.estado}
-                  onChange={handleChangeFormulario}
-                >
-                  {ESTADOS.map((estado) => (
-                    <option key={estado} value={estado}>
-                      {estado}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="productos-modal-actions">
-              <button className="productos-modal-cancel" onClick={handleCerrarModal}>
-                Cancelar
-              </button>
-              <button className="productos-modal-save" onClick={handleGuardar}>
-                Guardar
-              </button>
-            </div>
+          <div className="productos-modal-actions">
+            <button className="productos-modal-cancel" onClick={handleCerrarModal}>
+              Cancelar
+            </button>
+            <button className="productos-modal-save" onClick={handleGuardar}>
+              Guardar
+            </button>
           </div>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </Layout>
+);
 }
 
 export default GestionProductos;

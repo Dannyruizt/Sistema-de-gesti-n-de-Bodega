@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/NuevaVenta.css';
 
 // Aquí se llamará a productoService.js para traer el catálogo real
@@ -96,21 +96,10 @@ const handleAgregarAlCarrito = () => {
 
   //evito comentar lo obvio
   return (
-    <div className="venta-container">
-      <NavBar role="Encargado" />
-
-      <main className="venta-content">
-        <header className="venta-header">
-          <div className="venta-header-left">
-            <div className="venta-header-icon">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-              </svg>
-            </div>
-            <h1 className="venta-title">Nueva Venta</h1>
-          </div>
-        </header>
-
+    <Layout role="Encargado" title="Nueva Venta">
+     <div className="venta-content">
+       <div className="venta-actions-row">
+       </div>
         {ventaFinalizada && (
           <div className="venta-success-banner">✓ Venta finalizada exitosamente</div>
         )}
@@ -240,8 +229,8 @@ const handleAgregarAlCarrito = () => {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

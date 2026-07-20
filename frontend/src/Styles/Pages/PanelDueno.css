@@ -409,6 +409,14 @@
   flex-shrink: 0;
 }
 
+.dueno-panel-actions-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
 .dueno-panel-exclusive-text { flex: 1; }
 .dueno-panel-exclusive-name { font-size: 14px; font-weight: 500; margin: 0; color: #0a0a0a; }
 .dueno-panel-exclusive-detail { font-size: 12px; color: var(--panel-muted); margin: 2px 0 0 0; }

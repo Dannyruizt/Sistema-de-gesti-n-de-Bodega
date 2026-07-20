@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../Styles/Pages/AgregarProducto.css';
 
 // Aquí se llamará a productoService.js (o como le haya puesto Neto) para tener los datos chidos
@@ -76,7 +76,7 @@ function AgregarProducto() {
 // el html así bn perro
   return (
     <div className="agregarprod-container">
-      <NavBar role="Encargado" />
+      <Layout role="Encargado" />
 
       <main className="agregarprod-content">
         <header className="agregarprod-header">

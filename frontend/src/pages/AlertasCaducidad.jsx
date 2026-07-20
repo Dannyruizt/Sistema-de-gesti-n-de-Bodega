@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/AlertasCaducidad.css';
 
 // Aquí se llamará a alertaService.js para traer los lotes reales
@@ -90,23 +90,11 @@ function AlertasCaducidad() {
   };
 // esta es la estructura así bn pro como en tópicos con html
   return (
-    <div className="alertas-container">
-      <NavBar role="Dueño" />
-
-      <main className="alertas-content">
-        <header className="alertas-header">
-          <div>
-            <div className="alertas-title-row">
-              <h1 className="alertas-title">Alertas de Caducidad</h1>
-              <span className="alertas-urgent-badge">{conteos.vencido + conteos.critico} urgentes</span>
-            </div>
-            <p className="alertas-subtitle">Monitoreo de fechas de vencimiento por lote</p>
-          </div>
-          <div className="alertas-header-actions">
-            <button className="alertas-config-button">Configurar alertas</button>
-          </div>
-        </header>
-
+    <Layout role="Dueño" title="Alertas de Caducidad" subtitle="Monitoreo de fechas de vencimiento por lote">
+     <div className="alertas-content">
+       <div className="alertas-actions-row">
+         <span className="alertas-urgent-badge">{conteos.vencido + conteos.critico} urgentes</span>
+       </div>
         <section className="alertas-risk-banner">
           <div className="alertas-risk-left">
             <div className="alertas-risk-icon">⚠</div>
@@ -278,8 +266,8 @@ function AlertasCaducidad() {
             <span className="alertas-legend-dot alertas-legend-dot-vigente" /> Vigente
           </span>
         </div>
-      </main> 
-    </div>
+      </div>
+    </Layout>
   );
 }
 

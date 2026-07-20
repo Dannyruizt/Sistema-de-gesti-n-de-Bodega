@@ -13,7 +13,7 @@ import GestionCatalogo from '../../pages/GestionCatalogo';
 import HistorialVentasDueno from '../../pages/historialVentasDueno';
 import AgregarProducto from '../../pages/AgregarProducto';
 import Historico from '../../pages/Historico';
-import '../../Styles/variables.css';
+//import '../../Styles/variables.css';
 import '../../Styles/reset.css';
 
 //route path = cómo aparece en el buscador --- {nombre del archivo}

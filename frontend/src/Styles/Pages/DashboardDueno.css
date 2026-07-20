@@ -61,7 +61,7 @@
   align-items: center;
   gap: 8px;
 }
-
+/*
 .dueno-role-pill {
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
@@ -80,7 +80,7 @@
   padding: 6px 8px;
   border-radius: 8px;
   cursor: pointer;
-}
+}*/
 
 /* Content */
 .dueno-content {
@@ -264,7 +264,7 @@
 
 .dueno-category-fill {
   height: 100%;
-  background-color: var(--dueno-bar-color);
+  background-color: var(--dueno-category-fill);
   border-radius: 999px;
 }
 

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/Historico.css';
 
 // Aquí se llamará a ventaService.js (o como se llame) para traer el histórico real
@@ -46,24 +46,8 @@ function Historico() {
 
   //html pro
   return (
-    <div className="historico-container">
-      <NavBar role="Encargado" />
-
-      <main className="historico-content">
-        <header className="historico-header">
-          <div className="historico-header-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 8v4l3 3M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" />
-            </svg>
-          </div>
-          <div>
-            <h1 className="historico-title">Histórico</h1>
-            <p className="historico-subtitle">
-              Consulta el rendimiento de meses anteriores y tendencias de productos
-            </p>
-          </div>
-        </header>
-
+    <Layout role="Encargado" title="Histórico" subtitle="Consulta el rendimiento de meses anteriores y tendencias de productos">
+     <div className="historico-content"></div>
         <section className="historico-filters">
           <div className="historico-filter-field">
             <label className="historico-label">Desde:</label>
@@ -145,8 +129,7 @@ function Historico() {
             <p className="historico-empty">No se encontraron ventas con estos filtros.</p>
           )}
         </section>
-      </main>
-    </div>
+        </Layout>
   );
 }
 

@@ -10,6 +10,12 @@
   padding: 32px 24px;
 }
 
+.historial-actions-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
 /* Header */
 .historial-header {
   display: flex;

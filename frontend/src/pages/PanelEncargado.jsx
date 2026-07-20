@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/PanelEncargado.css';
 
 // Aquí se llamará a panelService.js para traer datos reales
@@ -81,22 +81,13 @@ function PanelEncargado() {
 
 //en efecto, es html
   return (
-    <div className="encargado-panel">
-      <NavBar role="Encargado" />
-
-      <main className="encargado-panel-content">
-        <header className="encargado-panel-header">
-          <div className="encargado-panel-header-left">
-            <div className="encargado-panel-header-icon">
-              <Icon type="shield" size={22} />
-            </div>
-            <div>
-              <h1 className="encargado-panel-title">Panel del Encargado</h1>
-              <p className="encargado-panel-subtitle">Turno activo · Jueves, 25 de Junio 2026</p>
-            </div>
-          </div>
-        </header>
-
+    <Layout role="Encargado" title="Panel del Encargado" subtitle="Turno activo · Jueves, 25 de Junio 2026">
+     <div className="encargado-panel-content">
+       <div className="encargado-panel-actions-row">
+         <button className="encargado-panel-secondary-button">
+           <Icon type="shield" size={14} /> Ver mis permisos
+         </button>
+       </div>
         <section className="encargado-panel-alert-banner">
           <div className="encargado-panel-alert-left">
             <div className="encargado-panel-alert-icon">
@@ -234,8 +225,8 @@ function PanelEncargado() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

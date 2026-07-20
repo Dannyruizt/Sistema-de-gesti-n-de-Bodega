@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
 import '../styles/pages/GestionCatalogo.css';
 
 // Aquí se llamará a catalogoService.js para traer datos reales
@@ -81,15 +81,8 @@ function GestionCatalogo() {
   };
 
   return (
-    <div className="catalogo-container">
-      <NavBar role="Encargado" />
-
-      <main className="catalogo-content">
-        <header className="catalogo-header">
-          <h1 className="catalogo-title">Gestión de Catálogo</h1>
-          <p className="catalogo-subtitle">Administra categorías y proveedores desde un solo lugar</p>
-        </header>
-
+    <Layout role="Encargado" title="Gestión de Catálogo" subtitle="Administra categorías y proveedores desde un solo lugar">
+     <div className="catalogo-content"></div>
         <section className="catalogo-stats-grid">
           <div className="catalogo-stat-card">
             <p className="catalogo-stat-label">CATEGORÍAS</p>
@@ -263,8 +256,7 @@ function GestionCatalogo() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+        </Layout>
   );
 }
 
