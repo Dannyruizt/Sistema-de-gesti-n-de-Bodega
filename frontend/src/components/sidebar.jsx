@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import logoAdmBodega from "../assets/logo.jpg";
 import '../Styles/componentes/Sidebar.css';
 
 const NAV_LINKS = [
@@ -41,7 +42,7 @@ function Sidebar({ role = 'Encargado' }) {
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
-        <div className="sidebar-brand-icon">AB</div>
+        <img src= {logoAdmBodega} alt="Logo ADM Bodega" className="sidebar-brand-logo" />
         <span className="sidebar-brand-text">ADM Bodega</span>
       </div>
 
@@ -54,7 +55,7 @@ function Sidebar({ role = 'Encargado' }) {
           >
             <Icon type={link.icon} />
             <span className="sidebar-link-label">{link.label}</span>
-            {link.badge && <span className="sidebar-badge">{link.badge}</span>}
+            {link.badge && <span className="sidebar-badge-logo">{link.badge}</span>}
           </button>
         ))}
       </nav>
