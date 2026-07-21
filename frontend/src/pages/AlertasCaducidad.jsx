@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import Layout from '../components/Layout';
-import '../styles/pages/AlertasCaducidad.css';
+import '../Styles/Pages/AlertasCaducidad.css';
 
 // Aquí se llamará a alertaService.js para traer los lotes reales
 const LOTES_INICIALES = [

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import '../styles/pages/DashboardDueno.css';
+import '../Styles/Pages/DashboardDueno.css';
 
 // Aquí se llamará a dashboardService.js para traer datos reales
 const STAT_CARDS = [

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import '../styles/pages/ReabastecimientoInventario.css';
+import '../Styles/Pages/ReabastecimientoInventario.css';
 
 // Aquí se llamará a proveedorService.js y productoService.js para traer datos reales
 const PROVEEDORES_INICIALES = ['Mayoreo Central', 'Distribuidora Norte', 'Bebidas del Sureste'];

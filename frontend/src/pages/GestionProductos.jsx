@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import Layout from '../components/Layout';
-import '../styles/pages/GestionProductos.css';
+import '../Styles/Pages/GestionProductos.css';
 
 // Aquí se llamará a productoService.js para traer el listado real
 const PRODUCTOS_INICIALES = [

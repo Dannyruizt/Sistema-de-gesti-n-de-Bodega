@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '../components/Layout';
-import '../styles/pages/RolesPermisos.css';
+import '../Styles/Pages/RolesPermisos.css';
 
 // Aquí se llamará a usuarioService.js para traer los usuarios reales
 const USUARIOS_INICIALES = [

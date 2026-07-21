@@ -1,4 +1,4 @@
-import Sidebar from './Sidebar';
+import Sidebar from './sidebar';
 import TopBar from './TopBar';
 import '../Styles/componentes/Layout.css';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '../components/Layout';
-import '../styles/pages/GestionCatalogo.css';
+import '../Styles/Pages/GestionCatalogo.css';
 
 // Aquí se llamará a catalogoService.js para traer datos reales
 const COLORES_AVATAR = [

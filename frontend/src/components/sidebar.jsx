@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../assets/Context/AuthContext';
 import logoAdmBodega from './logo.jpg';
-import '../Styles/componentes/Sidebar.css';
+import '../Styles/componentes/sidebar.css';
 
 function getNavLinks(rol) {
   const links = [

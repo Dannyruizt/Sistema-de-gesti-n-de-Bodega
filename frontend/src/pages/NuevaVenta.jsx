@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import Layout from '../components/Layout';
-import '../styles/pages/NuevaVenta.css';
+import '../Styles/Pages/NuevaVenta.css';
 
 // Aquí se llamará a productoService.js para traer el catálogo real
 const CATALOGO_PRODUCTOS = [

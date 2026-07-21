@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import '../styles/pages/Historico.css';
+import '../Styles/Pages/Historico.css';
 
 // Aquí se llamará a ventaService.js (o como se llame) para traer el histórico real
 const VENTAS_HISTORICAS = [
