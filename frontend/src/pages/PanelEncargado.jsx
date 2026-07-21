@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import '../styles/pages/PanelEncargado.css';
+import '../Styles/Pages/PanelEncargado.css';
 
 // Aquí se llamará a panelService.js para traer datos reales
 const METRICAS = [
@@ -9,7 +10,7 @@ const METRICAS = [
   { icon: 'box', value: '5', label: 'Stock bajo', detail: 'productos a reponer' },
   { icon: 'check', value: '0/5', label: 'Tareas del turno', detail: '0% completado' },
 ];
-//resumen de todo (tareas, alertas y accesos rápidos)
+
 const TAREAS_TURNO = [
   { id: 1, texto: 'Revisar alertas de caducidad del día', prioridad: 'alta', hecha: false },
   { id: 2, texto: 'Verificar stock de productos con alerta', prioridad: 'alta', hecha: false },
@@ -27,10 +28,10 @@ const ALERTAS_CADUCIDAD = [
 ];
 
 const ACCIONES_RAPIDAS = [
-  { icon: 'cart', titulo: 'Nueva Venta', detalle: 'Registrar una venta' },
-  { icon: 'alert', titulo: 'Alertas de Caducidad', detalle: '5 urgentes' },
-  { icon: 'search', titulo: 'Consultar Inventario', detalle: 'Ver productos y stock' },
-  { icon: 'clock', titulo: 'Historial de Ventas', detalle: '5 pendientes' },
+  { icon: 'cart', titulo: 'Nueva Venta', detalle: 'Registrar una venta', path: '/nueva-venta' },
+  { icon: 'alert', titulo: 'Alertas de Caducidad', detalle: '5 urgentes', path: '/alertas' },
+  { icon: 'search', titulo: 'Consultar Inventario', detalle: 'Ver productos y stock', path: '/inventario' },
+  { icon: 'clock', titulo: 'Historial de Ventas', detalle: '5 pendientes', path: '/historial-ventas' },
 ];
 
 const STOCK_BAJO = [
@@ -62,32 +63,24 @@ function Icon({ type, size = 16 }) {
 const PRIORIDAD_LABEL = { alta: 'Alta', media: 'Media', baja: 'Baja' };
 
 function PanelEncargado() {
+  const navigate = useNavigate();
   const [tareas, setTareas] = useState(TAREAS_TURNO);
 
   useEffect(() => {
     // Aquí se llamará a panelService.js
-    // Ejemplo: panelService.getResumenEncargado().then(...)
   }, []);
 
   const toggleTarea = (id) => {
     setTareas((prev) =>
       prev.map((t) => (t.id === id ? { ...t, hecha: !t.hecha } : t))
     );
-    // Aquí se llamará a panelService.js para persistir el cambio
-    // Ejemplo: panelService.actualizarTarea(id, !hecha);
   };
 
   const completadas = tareas.filter((t) => t.hecha).length;
 
-//en efecto, es html
   return (
     <Layout role="Encargado" title="Panel del Encargado" subtitle="Turno activo · Jueves, 25 de Junio 2026">
-     <div className="encargado-panel-content">
-       <div className="encargado-panel-actions-row">
-         <button className="encargado-panel-secondary-button">
-           <Icon type="shield" size={14} /> Ver mis permisos
-         </button>
-       </div>
+      <div className="encargado-panel-content">
         <section className="encargado-panel-alert-banner">
           <div className="encargado-panel-alert-left">
             <div className="encargado-panel-alert-icon">
@@ -100,7 +93,7 @@ function PanelEncargado() {
               </p>
             </div>
           </div>
-          <button className="encargado-panel-alert-button">
+          <button className="encargado-panel-alert-button" onClick={() => navigate('/alertas')}>
             <Icon type="alert" size={12} /> Revisar ahora
           </button>
         </section>
@@ -154,7 +147,9 @@ function PanelEncargado() {
             <div className="encargado-panel-card">
               <div className="encargado-panel-card-header">
                 <h3 className="encargado-panel-card-title">Alertas de Caducidad Pendientes</h3>
-                <button className="encargado-panel-link-button">Ver todas →</button>
+                <button className="encargado-panel-link-button" onClick={() => navigate('/alertas')}>
+                  Ver todas →
+                </button>
               </div>
               <div className="encargado-panel-list">
                 {ALERTAS_CADUCIDAD.map((a, i) => (
@@ -183,7 +178,11 @@ function PanelEncargado() {
               <h3 className="encargado-panel-card-title">Acciones Rápidas</h3>
               <div className="encargado-panel-quick-grid">
                 {ACCIONES_RAPIDAS.map((a) => (
-                  <button className="encargado-panel-quick-button" key={a.titulo}>
+                  <button
+                    className="encargado-panel-quick-button"
+                    key={a.titulo}
+                    onClick={() => navigate(a.path)}
+                  >
                     <div className="encargado-panel-quick-icon">
                       <Icon type={a.icon} size={16} />
                     </div>
@@ -192,15 +191,14 @@ function PanelEncargado() {
                   </button>
                 ))}
               </div>
-              <button className="encargado-panel-primary-button">
-                <Icon type="cart" size={16} /> Iniciar Nueva Venta
-              </button>
             </div>
 
             <div className="encargado-panel-card">
               <div className="encargado-panel-card-header">
                 <h3 className="encargado-panel-card-title">Productos con Stock Bajo</h3>
-                <button className="encargado-panel-link-button">Ver todos →</button>
+                <button className="encargado-panel-link-button" onClick={() => navigate('/productos')}>
+                  Ver todos →
+                </button>
               </div>
               <div className="encargado-panel-list">
                 {STOCK_BAJO.map((p) => (
@@ -219,7 +217,11 @@ function PanelEncargado() {
                   </div>
                 ))}
               </div>
-              <button className="encargado-panel-link-button-centered">
+
+              <button
+                className="encargado-panel-link-button-centered"
+                onClick={() => navigate('/reabastecimiento')}
+              >
                 Registrar reabastecimiento
               </button>
             </div>

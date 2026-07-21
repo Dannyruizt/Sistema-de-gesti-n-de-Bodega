@@ -13,6 +13,7 @@ import GestionCatalogo from '../../pages/GestionCatalogo';
 import HistorialVentasDueno from '../../pages/historialVentasDueno';
 import AgregarProducto from '../../pages/AgregarProducto';
 import Historico from '../../pages/Historico';
+import Inventario from '../../pages/Inventario';
 //import '../../Styles/variables.css';
 import '../../Styles/reset.css';
 
@@ -35,6 +36,7 @@ function AppRoutes() {
         <Route path="/historial-ventas" element={<HistorialVentasDueno />} />
         <Route path="/agregar-producto" element={<AgregarProducto />} />
         <Route path="/historico" element={<Historico />} />
+        <Route path="/inventario" element={<Inventario />} />
       </Routes>
     </BrowserRouter>
   );

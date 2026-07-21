@@ -59,7 +59,7 @@
   margin: 4px 0 0 0;
 }
 
-.encargado-panel-secondary-button {
+/*ncargado-panel-secondary-button {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -69,7 +69,7 @@
   padding: 8px 14px;
   font-size: 14px;
   cursor: pointer;
-}
+}/*
 
 /* Alert banner */
 .encargado-panel-alert-banner {
@@ -246,13 +246,13 @@
 .encargado-panel-expiry-date { font-size: 12px; color: var(--panel-muted); margin: 2px 0 0 0; }
 
 /* Quick actions */
-.encargado-panel-quick-grid {
+/*argado-panel-quick-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin: 16px 0;
 }
-
+*/
 .encargado-panel-quick-button {
   background-color: #ffffff;
   border: 1px solid var(--panel-border);
