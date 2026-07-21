@@ -12,7 +12,7 @@ import GestionProductos from '../../pages/GestionProductos';
 import AlertasCaducidad from '../../pages/AlertasCaducidad';
 import ReabastecimientoInventario from '../../pages/ReabastecimientoInventario';
 import GestionCatalogo from '../../pages/GestionCatalogo';
-import HistorialVentasDueno from '../../pages/historialVentasDueno';
+import HistorialVentasDueno from '../../pages/HistorialVentasDueno';
 import AgregarProducto from '../../pages/AgregarProducto';
 import Historico from '../../pages/Historico';
 import Inventario from '../../pages/Inventario';
