@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import '../styles/pages/DashboardEncargado.css';
-
+import '../Styles/Pages/DashboardEncargado.css';
 
 // Aquí se llamará a dashboardService.js para traer datos reales
 const STAT_CARDS = [
@@ -11,7 +10,8 @@ const STAT_CARDS = [
   { icon: 'dollar', value: '$1,200', label: 'Ventas hoy' },
   { icon: 'tag', value: '6', label: 'Categorías' },
 ];
-//alertas de inventario (productos con stock bajo o crítico)
+
+// Alertas de inventario (productos con stock bajo o crítico)
 const INVENTORY_ALERTS = [
   { id: 2, producto: 'Mouse Inalámbrico', categoria: 'Electrónica', stock: 3 },
   { id: 5, producto: 'Café Orgánico 500g', categoria: 'Alimentos', stock: 5 },
@@ -37,69 +37,67 @@ function StatIcon({ type }) {
 
 function DashboardEncargado() {
   const navigate = useNavigate();
-  //const [activeLink, setActiveLink] = useState('Dashboard');
 
   useEffect(() => {
     // Aquí se llamará a dashboardService.js
     // Ejemplo: dashboardService.getResumenEncargado().then(...)
   }, []);
 
- return (
+  return (
     <Layout role="Encargado" title="Dashboard" subtitle="Resumen general de inventario">
-      <div className="encargado-content"></div>
-      
-      <section className="encargado-stats-grid">
-        {STAT_CARDS.map((card) => (
-          <div className="encargado-stat-card" key={card.label}>
-            <div className="encargado-stat-icon">
-              <StatIcon type={card.icon} />
+      <div className="encargado-content">
+        <section className="encargado-stats-grid">
+          {STAT_CARDS.map((card) => (
+            <div className="encargado-stat-card" key={card.label}>
+              <div className="encargado-stat-icon">
+                <StatIcon type={card.icon} />
+              </div>
+              <div>
+                <p className="encargado-stat-value">{card.value}</p>
+                <p className="encargado-stat-label">{card.label}</p>
+              </div>
             </div>
-            <div>
-              <p className="encargado-stat-value">{card.value}</p>
-              <p className="encargado-stat-label">{card.label}</p>
-            </div>
-          </div>
-        ))}
-      </section>
+          ))}
+        </section>
 
-      <section className="encargado-alerts-section">
-        <h2 className="encargado-alerts-title">Alerta de inventario</h2>
+        <section className="encargado-alerts-section">
+          <h2 className="encargado-alerts-title">Alerta de inventario</h2>
 
-        <div className="encargado-table-wrapper">
-          <table className="encargado-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Producto</th>
-                <th>Categoría</th>
-                <th>Stock Actual</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {INVENTORY_ALERTS.map((item) => (
-                <tr key={item.id} className="encargado-row-alert">
-                  <td>{item.id}</td>
-                  <td>{item.producto}</td>
-                  <td>{item.categoria}</td>
-                  <td className="encargado-stock-value">{item.stock}</td>
-                  <td>
-                    <span className="encargado-badge">Bajo</span>
-                  </td>
+          <div className="encargado-table-wrapper">
+            <table className="encargado-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Producto</th>
+                  <th>Categoría</th>
+                  <th>Stock Actual</th>
+                  <th>Estado</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {INVENTORY_ALERTS.map((item) => (
+                  <tr key={item.id} className="encargado-row-alert">
+                    <td>{item.id}</td>
+                    <td>{item.producto}</td>
+                    <td>{item.categoria}</td>
+                    <td className="encargado-stock-value">{item.stock}</td>
+                    <td>
+                      <span className="encargado-badge">Bajo</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-        <div className="encargado-alerts-footer"> 
-          {/* 3. Agregamos el onClick para redirigir a tu vista de productos */}
-           <button className="encargado-link-button" onClick={() => navigate('/inventario')}>
-               Ver todos los productos →
+          <div className="encargado-alerts-footer"> 
+            <button className="encargado-link-button" onClick={() => navigate('/inventario')}>
+              Ver todos los productos →
             </button> 
-        </div>
-      </section> 
-      </Layout>
+          </div>
+        </section> 
+      </div>
+    </Layout>
   );
 }
 
