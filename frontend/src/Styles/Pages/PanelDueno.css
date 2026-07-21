@@ -69,7 +69,7 @@
   font-size: 13px;
   color: var(--panel-muted);
 }
-
+/*
 .dueno-panel-secondary-button {
   display: flex;
   align-items: center;
@@ -80,7 +80,7 @@
   padding: 8px 14px;
   font-size: 14px;
   cursor: pointer;
-}
+}*/
 
 /* Alert banner */
 .dueno-panel-alert-banner {

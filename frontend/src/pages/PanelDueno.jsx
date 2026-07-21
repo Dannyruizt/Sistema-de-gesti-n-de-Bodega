@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import '../styles/pages/PanelDueno.css';
 
@@ -36,15 +37,14 @@ const VENTAS_RECIENTES = [
   { id: 10, producto: 'Nissi', categoria: 'Alimentos', total: 85.0, fecha: '20/01/2026', estado: 'completado' },
   { id: 4, producto: 'Queso Chédar', categoria: 'Lácteos', total: 45.99, fecha: '15/02/2026', estado: 'completado' },
 ];
-//segun Neto esto se puede hacer, pero sólo Dios sabe
-const ACCIONES_EXCLUSIVAS = [
-  { icon: 'download', titulo: 'Exportar reporte mensual', detalle: 'PDF o CSV' },
-  { icon: 'bell', titulo: 'Configurar alertas de caducidad', detalle: 'Umbrales y notificaciones' },
-  { icon: 'grid', titulo: 'Gestionar catálogo', detalle: 'Categorías y proveedores' },
-  { icon: 'box', titulo: 'Gestión de productos', detalle: 'Inventario completo' },
-  { icon: 'truck', titulo: 'Reabastecimiento', detalle: 'Nuevas entradas' },
-  { icon: 'shield', titulo: 'Roles y permisos', detalle: 'Gestionar accesos' },
-];
+
+//accesos directos lol
+ const ACCIONES_EXCLUSIVAS = [
+   { icon: 'grid', titulo: 'Gestionar catálogo', detalle: 'Categorías y proveedores', path: '/catalogo' },
+   { icon: 'box', titulo: 'Gestión de productos', detalle: 'Inventario completo', path: '/productos' },
+   { icon: 'truck', titulo: 'Reabastecimiento', detalle: 'Nuevas entradas', path: '/reabastecimiento' },
+   { icon: 'shield', titulo: 'Roles y permisos', detalle: 'Gestionar accesos', path: '/roles-permisos' },
+ ];
 //íconos de adentro de los cuadritos
 function Icon({ type, size = 18 }) {
   const paths = {
@@ -69,7 +69,19 @@ function Icon({ type, size = 18 }) {
 }
 //la alerta de arriba, la de los lotes vencidos o por vencer
 function PanelDueno() {
+  const navigate = useNavigate();
   const [alertasVencimiento, setAlertasVencimiento] = useState({ cantidad: 5, valorEnRiesgo: 4040.41 });
+
+  const fechaHoy = useMemo(() => {
+     const hoy = new Date();
+     const texto = hoy.toLocaleDateString('es-MX', {
+       weekday: 'long',
+       day: 'numeric',
+       month: 'long',
+       year: 'numeric',
+     });
+     return texto.charAt(0).toUpperCase() + texto.slice(1);
+   }, []);
 
   useEffect(() => {
     // Aquí se llamará a panelService.js
@@ -80,12 +92,8 @@ function PanelDueno() {
   return (
     <Layout role="Dueño" title="Panel del Dueño" subtitle="Vista financiera y gestión completa del sistema">
      <div className="dueno-panel-content">
-       {/* la fecha y el botón "Ver roles y permisos" que antes vivían en el header pasan a una fila de acciones */}
        <div className="dueno-panel-actions-row">
-         <span className="dueno-panel-date">Jueves, 25 de Junio 2026</span>
-         <button className="dueno-panel-secondary-button">
-           <Icon type="shield" size={14} /> Ver roles y permisos
-         </button>
+         <span className="dueno-panel-date">{fechaHoy}</span>
        </div>
         <section className="dueno-panel-alert-banner">
           <div className="dueno-panel-alert-left">
@@ -102,7 +110,7 @@ function PanelDueno() {
               <p className="dueno-panel-alert-value">${alertasVencimiento.valorEnRiesgo.toFixed(2)}</p>
               <p className="dueno-panel-alert-value-label">valor en riesgo</p>
             </div>
-            <button className="dueno-panel-alert-button">
+            <button className="dueno-panel-alert-button" onClick={() => navigate('/alertas')}>
               <Icon type="alert" size={12} /> Revisar alertas
             </button>
           </div>
@@ -159,7 +167,9 @@ function PanelDueno() {
                 <h3 className="dueno-panel-card-title">Ingresos por Categoría</h3>
                 <p className="dueno-panel-card-subtitle">Distribución del mes actual</p>
               </div>
-              <button className="dueno-panel-link-button">Ver histórico →</button>
+              <button className="dueno-panel-link-button" onClick={() => navigate('/historico')}>
+                 Ver histórico →
+               </button>
             </div>
             <div className="dueno-panel-list">
               {INGRESOS_CATEGORIA.map((c) => (
@@ -185,7 +195,9 @@ function PanelDueno() {
         <section className="dueno-panel-card dueno-panel-sales-table-section">
           <div className="dueno-panel-card-header">
             <h3 className="dueno-panel-card-title">Ventas Recientes de Mayor Valor</h3>
-            <button className="dueno-panel-link-button">Ver historial completo →</button>
+            <button className="dueno-panel-link-button" onClick={() => navigate('/historial-ventas')}>
+               Ver historial completo →
+             </button>
           </div>
           <table className="dueno-panel-table">
             <thead>
@@ -221,7 +233,10 @@ function PanelDueno() {
           <h3 className="dueno-panel-exclusive-title">Acciones Exclusivas</h3>
           <div className="dueno-panel-exclusive-grid">
             {ACCIONES_EXCLUSIVAS.map((a) => (
-              <button className="dueno-panel-exclusive-button" key={a.titulo}>
+              <button
+                 className="dueno-panel-exclusive-button"
+                 key={a.titulo}
+                 onClick={() => navigate(a.path)}>
                 <div className="dueno-panel-exclusive-icon">
                   <Icon type={a.icon} size={18} />
                 </div>
