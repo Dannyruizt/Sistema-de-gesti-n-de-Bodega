@@ -10,6 +10,17 @@ html, body, #root {
   height: 100%;
 }
 
+html {
+   color-scheme: light; /* para q no s oscurezca el buscador */
+ }
+
+ input,
+ select,
+ textarea {
+   background-color: #ffffff;
+   color: #0a0a0a;
+ }
+
 body {
   overflow-x: auto; /* si la ventana es más angosta que 1280px, se hace scroll horizontal en vez de romper el layout */
 }

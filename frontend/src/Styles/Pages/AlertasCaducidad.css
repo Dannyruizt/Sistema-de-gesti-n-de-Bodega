@@ -5,6 +5,10 @@
 }
 
 .alertas-content {
+   --panel-border: #e5e7eb;
+ }
+
+.alertas-content {
   padding: 32px 24px;
 }
 

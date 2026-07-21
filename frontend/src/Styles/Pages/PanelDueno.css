@@ -1,18 +1,20 @@
 .dueno-panel {
-  --panel-border: #e5e7eb;
-  --panel-muted: #6a7282;
-  --panel-heading: #101828;
-  --panel-positive: #1f7a4d;
-  --panel-warning-bg: #fff3cd;
-  --panel-warning-text: #d08700;
-  --panel-danger-bg: #fde2e2;
-  --panel-danger-text: #b42318;
-  --panel-bar-color: #bbd7f7;
-
   background-color: #ffffff;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
 }
+
+.dueno-panel-content {
+   --panel-border: #e5e7eb;
+   --panel-muted: #6a7282;
+   --panel-heading: #101828;
+   --panel-positive: #1f7a4d;
+   --panel-warning-bg: #fff3cd;
+   --panel-warning-text: #d08700;
+   --panel-danger-bg: #fde2e2;
+   --panel-danger-text: #b42318;
+   --panel-bar-color: #bbd7f7;
+ }
 
 .dueno-panel-content {
   padding: 32px 24px;

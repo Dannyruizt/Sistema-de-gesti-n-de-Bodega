@@ -1,88 +1,9 @@
 .dueno-dashboard {
-  --dueno-navbar-bg: #1f7a4d;
-  --dueno-border: #e5e7eb;
-  --dueno-muted: #6a7282;
-  --dueno-heading: #101828;
-  --dueno-positive: #1f7a4d;
-  --dueno-critical-bg: #fde2e2;
-  --dueno-critical-text: #b42318;
-  --dueno-warning-bg: #fff3cd;
-  --dueno-warning-text: #d08700;
-  --dueno-bar-color: #bbd7f7;
-
   background-color: #ffffff;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
 }
 
-/* NavBar */
-
-.dueno-navbar-links {
-  display: flex;
-  gap: 2px;
-  flex-wrap: wrap;
-}
-
-.dueno-navlink {
-  position: relative;
-  background: transparent;
-  border: none;
-  color: #99a1af;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.dueno-navlink-active {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-}
-
-.dueno-navbadge {
-  position: absolute;
-  top: -6px;
-  right: 2px;
-  background-color: #fb2c36;
-  color: #ffffff;
-  font-size: 9px;
-  font-weight: 700;
-  border-radius: 999px;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dueno-navbar-user {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-/*
-.dueno-role-pill {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 10px;
-}
-
-.dueno-logout-button {
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 8px;
-  border-radius: 8px;
-  cursor: pointer;
-}*/
-
-/* Content */
 .dueno-content {
   padding: 32px 24px;
 }
@@ -91,13 +12,13 @@
   font-family: 'Inika', serif;
   font-size: 40px;
   font-weight: 700;
-  color: var(--dueno-heading);
+  color: var(--app-heading-text);
   margin: 0;
 }
 
 .dueno-subtitle {
   font-size: 16px;
-  color: var(--dueno-muted);
+  color: var(--app-muted-text);
   margin: 4px 0 0 0;
 }
 
@@ -111,7 +32,7 @@
 
 .dueno-stat-card {
   background-color: #ffffff;
-  border: 0.8px solid var(--dueno-border);
+  border: 0.8px solid var(--app-border);
   border-radius: 16px;
   padding: 20.8px;
 }
@@ -138,8 +59,8 @@
   font-weight: 500;
 }
 
-.dueno-trend-positive { color: var(--dueno-positive); }
-.dueno-trend-negative { color: var(--dueno-critical-text); }
+.dueno-trend-positive { color: var(--app-positive-text); }
+.dueno-trend-negative { color: var(--app-danger-text); }
 .dueno-trend-neutral { color: #99a1af; }
 
 .dueno-stat-value {
@@ -150,7 +71,7 @@
 
 .dueno-stat-label {
   font-size: 14px;
-  color: var(--dueno-muted);
+  color: var(--app-muted-text);
   margin: 2px 0 0 0;
 }
 
@@ -164,7 +85,7 @@
 
 .dueno-chart-card {
   background-color: #ffffff;
-  border: 0.8px solid var(--dueno-border);
+  border: 0.8px solid var(--app-border);
   border-radius: 16px;
   padding: 20.8px;
 }
@@ -191,7 +112,7 @@
 
 .dueno-chart-badge {
   background-color: #f0fdf4;
-  color: var(--dueno-positive);
+  color: var(--app-positive-text);
   font-size: 12px;
   font-weight: 500;
   padding: 4px 8px;
@@ -223,13 +144,13 @@
 
 .dueno-bar {
   width: 100%;
-  background-color: var(--dueno-bar-color);
+  background-color: var(--app-chart-bar-color);
   border-radius: 4px 4px 0 0;
 }
 
 .dueno-bar-label {
   font-size: 11px;
-  color: var(--dueno-muted);
+  color: var(--app-muted-text);
 }
 
 /* Category distribution */
@@ -264,14 +185,14 @@
 
 .dueno-category-fill {
   height: 100%;
-  background-color: var(--dueno-category-fill);
+  background-color: var(--app-chart-bar-color);
   border-radius: 999px;
 }
 
 /* Revenue line chart */
 .dueno-revenue-card {
   background-color: #ffffff;
-  border: 0.8px solid var(--dueno-border);
+  border: 0.8px solid var(--app-border);
   border-radius: 16px;
   padding: 20.8px;
   margin-top: 32px;
@@ -310,13 +231,13 @@
 .dueno-alerts-title {
   font-size: 24px;
   font-weight: 700;
-  color: var(--dueno-heading);
+  color: var(--app-heading-text);
   margin: 0;
 }
 
 .dueno-alerts-count {
-  background-color: var(--dueno-critical-bg);
-  color: var(--dueno-critical-text);
+  background-color: var(--app-danger-bg);
+  color: var(--app-danger-text);
   font-size: 12px;
   font-weight: 500;
   padding: 4px 8px;
@@ -324,7 +245,7 @@
 }
 
 .dueno-table-wrapper {
-  border: 0.8px solid var(--dueno-border);
+  border: 0.8px solid var(--app-border);
   border-radius: 16px;
   overflow: hidden;
   margin-top: 16px;
@@ -342,7 +263,7 @@
 
 .dueno-table th {
   text-align: left;
-  color: var(--dueno-muted);
+  color: var(--app-muted-text);
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
@@ -354,7 +275,7 @@
 .dueno-table td {
   padding: 16px 20px;
   border-bottom: 0.8px solid #f3f4f6;
-  color: var(--dueno-muted);
+  color: var(--app-muted-text);
 }
 
 .dueno-row-alert {
@@ -377,7 +298,7 @@
 }
 
 .dueno-stock-critico, .dueno-stock-sin_stock { color: #dc2626; }
-.dueno-stock-bajo { color: var(--dueno-warning-text); }
+.dueno-stock-bajo { color: var(--app-warning-text); }
 
 .dueno-stock-track {
   background-color: #f3f4f6;
@@ -389,7 +310,7 @@
 
 .dueno-stock-fill { height: 100%; border-radius: 999px; }
 .dueno-stock-fill-critico, .dueno-stock-fill-sin_stock { background-color: #dc2626; }
-.dueno-stock-fill-bajo { background-color: var(--dueno-warning-text); }
+.dueno-stock-fill-bajo { background-color: var(--app-warning-text); }
 
 .dueno-badge {
   display: inline-flex;
@@ -402,13 +323,13 @@
 }
 
 .dueno-badge-critico, .dueno-badge-sin_stock {
-  background-color: var(--dueno-critical-bg);
-  color: var(--dueno-critical-text);
+  background-color: var(--app-danger-bg);
+  color: var(--app-danger-text);
 }
 
 .dueno-badge-bajo {
-  background-color: var(--dueno-warning-bg);
-  color: var(--dueno-warning-text);
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
 }
 
 .dueno-alerts-footer {

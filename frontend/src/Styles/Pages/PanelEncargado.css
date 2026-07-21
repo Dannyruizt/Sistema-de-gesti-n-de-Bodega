@@ -1,15 +1,17 @@
 .encargado-panel {
-  --panel-border: rgba(0, 0, 0, 0.1);
-  --panel-muted: #6a7282;
-  --panel-heading: #101828;
-  --panel-positive: #1f7a4d;
-  --panel-danger-bg: #fde2e2;
-  --panel-danger-text: #b42318;
-
   background-color: #ffffff;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
 }
+
+.encargado-panel-content {
+   --panel-border: rgba(0, 0, 0, 0.1);
+   --panel-muted: #6a7282;
+   --panel-heading: #101828;
+   --panel-positive: #1f7a4d;
+   --panel-danger-bg: #fde2e2;
+   --panel-danger-text: #b42318;
+ }
 
 .encargado-panel-content {
   padding: 32px 24px;

@@ -1,6 +1,7 @@
 .layout-container {
   display: flex;
   min-height: 100vh;
+  width: 100%;
   background-color: #ffffff;
 }
 
@@ -9,6 +10,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  width: 100%;
 }
 
 .layout-content {

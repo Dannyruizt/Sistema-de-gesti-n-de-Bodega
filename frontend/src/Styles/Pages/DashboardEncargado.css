@@ -1,13 +1,15 @@
 .encargado-dashboard {
-  --encargado-navbar-bg: #1f7a4d;
-  --encargado-border: rgba(0, 0, 0, 0.1);
-  --encargado-danger-bg: #fde2e2;
-  --encargado-danger-text: #b42318;
-
   background-color: #ffffff;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
 }
+
+.encargado-content {
+   --encargado-navbar-bg: #1f7a4e;
+   --encargado-border: rgba(0, 0, 0, 0.1);
+   --encargado-danger-bg: #fde2e2;
+   --encargado-danger-text: #b42318;
+ }
 
 /* NavBar (idéntico en estructura al de Dueño, colores por rol) */
 .encargado-navbar {
