@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import NavBar from '../components/NavBar';
 import '../styles/pages/DashboardDueno.css';
 
 // Aquí se llamará a dashboardService.js para traer datos reales
@@ -95,8 +94,8 @@ function DashboardDueno() {
 
   // si, ya sé que es
   return (
-    <Layout role="Dueño" title="Dashboard" subtitle="Resumen general de inventario">
-       <div className="dueno-content">
+    <Layout title="Dashboard" subtitle="Resumen general de inventario">
+     <div className="dueno-content">
 
         <section className="dueno-stats-grid">
           {STAT_CARDS.map((card) => (
