@@ -1,5 +1,7 @@
 //rutas d dónde se encuentran las vistas en las carpetas del proyecto
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from '../../assets/Context/AuthContext';
+import ProtectedRoute from '../../components/ProtectedRoute';
 import Login from '../../pages/Login';
 import DashboardDueno from '../../pages/DashboardDueno';
 import DashboardEncargado from '../../pages/DashboardEncargado';
@@ -22,24 +24,55 @@ import '../../Styles/reset.css';
 function AppRoutes() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<DashboardDueno />} />
-        <Route path="/dashboard-encargado" element={<DashboardEncargado />} />
-        <Route path="/panel" element={<PanelDueno />} />
-        <Route path="/panel-encargado" element={<PanelEncargado />} />
-        <Route path="/nueva-venta" element={<NuevaVenta />} />
-        <Route path="/productos" element={<GestionProductos />} />
-        <Route path="/alertas" element={<AlertasCaducidad />} />
-        <Route path="/reabastecimiento" element={<ReabastecimientoInventario />} />
-        <Route path="/catalogo" element={<GestionCatalogo />} />
-        <Route path="/historial-ventas" element={<HistorialVentasDueno />} />
-        <Route path="/agregar-producto" element={<AgregarProducto />} />
-        <Route path="/historico" element={<Historico />} />
-        <Route path="/inventario" element={<Inventario />} />
-        <Route path="/roles-permisos" element={<RolesPermisos />} />
-      </Routes>
+      <AuthProvider>
+         <Routes>
+           <Route path="/" element={<Login />} />
+           <Route path="/login" element={<Login />} />
+
+           <Route path="/dashboard" element={
+             <ProtectedRoute rolesPermitidos={['Dueño']}><DashboardDueno /></ProtectedRoute>
+           } />
+           <Route path="/dashboard-encargado" element={
+             <ProtectedRoute rolesPermitidos={['Encargado']}><DashboardEncargado /></ProtectedRoute>
+           } />
+           <Route path="/panel" element={
+             <ProtectedRoute rolesPermitidos={['Dueño']}><PanelDueno /></ProtectedRoute>
+           } />
+           <Route path="/panel-encargado" element={
+             <ProtectedRoute rolesPermitidos={['Encargado']}><PanelEncargado /></ProtectedRoute>
+           } />
+           <Route path="/nueva-venta" element={
+             <ProtectedRoute><NuevaVenta /></ProtectedRoute>
+           } />
+           <Route path="/productos" element={
+             <ProtectedRoute><GestionProductos /></ProtectedRoute>
+           } />
+           <Route path="/alertas" element={
+             <ProtectedRoute><AlertasCaducidad /></ProtectedRoute>
+           } />
+           <Route path="/reabastecimiento" element={
+             <ProtectedRoute><ReabastecimientoInventario /></ProtectedRoute>
+           } />
+           <Route path="/catalogo" element={
+             <ProtectedRoute><GestionCatalogo /></ProtectedRoute>
+           } />
+           <Route path="/historial-ventas" element={
+             <ProtectedRoute><HistorialVentasDueno /></ProtectedRoute>
+           } />
+           <Route path="/historico" element={
+             <ProtectedRoute><Historico /></ProtectedRoute>
+           } />
+           <Route path="/productos/agregar" element={
+             <ProtectedRoute><AgregarProducto /></ProtectedRoute>
+           } />
+           <Route path="/inventario" element={
+             <ProtectedRoute><Inventario /></ProtectedRoute>
+           } />
+           <Route path="/roles-permisos" element={
+             <ProtectedRoute rolesPermitidos={['Dueño']}><RolesPermisos /></ProtectedRoute>
+           } />
+         </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

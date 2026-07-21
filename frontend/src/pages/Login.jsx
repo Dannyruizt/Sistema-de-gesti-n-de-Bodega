@@ -1,15 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from "../assets/Context/AuthContext";
 import '../Styles/Pages/Login.css';
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     usuario: '',
     password: '',
+    rol: 'Encargado',
   });
 
-//esta madre no muestra si escribes lol
   const [mostrarPassword, setMostrarPassword] = useState(false);
   const [error, setError] = useState('');
   const [cargando, setCargando] = useState(false);
@@ -31,9 +33,11 @@ function Login() {
     setCargando(true);
 
     try {
-      // Aquí se llamará a authService.js
-      // Ejemplo: const response = await authService.login(formData.usuario, formData.password);
-      // Guardar token, redirigir según rol (Encargado / cajero), etc.
+      // Ejemplo: const datosUsuario = await authService.login(formData.usuario, formData.password);
+       // El backend debe devolver { nombre, correo, rol } — por ahora, fingimos q es así
+       const datosUsuario = { nombre: formData.usuario, rol: formData.rol };
+       login(datosUsuario);
+       navigate(formData.rol === 'Dueño' ? '/dashboard' : '/dashboard-encargado');
 
        // Redirige según el rol devuelto por el backend; de momento va al dashboard del encargado pq se ve más pro
 +       navigate('/dashboard');
@@ -72,6 +76,20 @@ function Login() {
               autoComplete="username"
             />
           </div>
+
+          <div className="login-field">
+           <label htmlFor="rol" className="login-label">Ingresar como</label>
+           <select
+             id="rol"
+             name="rol"
+             className="login-input"
+             value={formData.rol}
+             onChange={handleChange}
+           >
+             <option value="Encargado">Encargado</option>
+             <option value="Dueño">Dueño</option>
+           </select>
+         </div>
 
           <div className="login-field">
             <label htmlFor="password" className="login-label">

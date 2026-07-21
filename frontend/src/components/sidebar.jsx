@@ -1,20 +1,25 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from "../assets/Context/AuthContext";
 import logoAdmBodega from "../assets/logo.jpg";
 import '../Styles/componentes/Sidebar.css';
 
-const NAV_LINKS = [
-  { label: 'Dashboard', path: '/dashboard', icon: 'grid' },
-  { label: 'Gestión de productos', path: '/productos', icon: 'box' },
-  { label: 'Nueva venta', path: '/nueva-venta', icon: 'cart' },
-  { label: 'Historial de ventas', path: '/historial-ventas', icon: 'clock' },
-  { label: 'Reabastecimiento de inventario', path: '/reabastecimiento', icon: 'truck' },
-  { label: 'Gestión de catálogo', path: '/catalogo', icon: 'tag' },
-  { label: 'Alertas de caducidad', path: '/alertas', icon: 'alert', badge: 5 },
-];
+function getNavLinks(rol) {
+   return [
+     { label: 'Dashboard', path: rol === 'Dueño' ? '/dashboard' : '/dashboard-encargado', icon: 'grid' },
+     { label: 'Resúmenes', path: rol === 'Dueño' ? '/panel' : '/panel-encargado', icon: 'bar-chart' },
+     { label: 'Gestión de productos', path: '/productos', icon: 'box' },
+     { label: 'Nueva venta', path: '/nueva-venta', icon: 'cart' },
+     { label: 'Historial de ventas', path: '/historial-ventas', icon: 'clock' },
+     { label: 'Reabastecimiento de inventario', path: '/reabastecimiento', icon: 'truck' },
+     { label: 'Gestión de catálogo', path: '/catalogo', icon: 'tag' },
+     { label: 'Alertas de caducidad', path: '/alertas', icon: 'alert', badge: 5 },
+   ];
+ }
 
 function Icon({ type }) {
   const paths = {
     grid: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z',
+    'bar-chart': 'M12 20V10M18 20V4M6 20v-4',
     box: 'M21 8V21H3V8M1 3H23V8H1V3ZM10 12H14',
     cart: 'M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6',
     clock: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2',
@@ -29,13 +34,15 @@ function Icon({ type }) {
   );
 }
 
-function Sidebar({ role = 'Encargado' }) {
+function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { usuario, logout: cerrarSesion } = useAuth();
+   const rol = usuario?.rol || 'Encargado';
+   const navLinks = getNavLinks(rol);
 
   const handleSalir = () => {
-    // Aquí se llamará a authService.js
-    // Ejemplo: authService.logout();
+    cerrarSesion();
     navigate('/login');
   };
 
@@ -47,7 +54,7 @@ function Sidebar({ role = 'Encargado' }) {
       </div>
 
       <nav className="sidebar-nav">
-        {NAV_LINKS.map((link) => (
+        {navLinks.map((link) => (
           <button
             key={link.label}
             className={`sidebar-link ${location.pathname === link.path ? 'sidebar-link-active' : ''}`}
@@ -61,7 +68,7 @@ function Sidebar({ role = 'Encargado' }) {
       </nav>
 
       <div className="sidebar-footer">
-        <span className="sidebar-role-pill">{role}</span>
+        <span className="sidebar-role-pill">{rol}</span>
         <button className="sidebar-logout-button" onClick={handleSalir}>
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
