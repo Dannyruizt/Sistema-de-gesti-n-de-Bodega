@@ -45,6 +45,12 @@ function GestionCatalogo() {
   const [mostrarFormProveedor, setMostrarFormProveedor] = useState(false);
   const [nuevoProveedor, setNuevoProveedor] = useState({ nombre: '', iniciales: '', color: 0 });
 
+  const [mostrarFormEliminarCategoria, setMostrarFormEliminarCategoria] = useState(false);
+   const [categoriaAEliminar, setCategoriaAEliminar] = useState('');
+
+   const [mostrarFormEliminarProveedor, setMostrarFormEliminarProveedor] = useState(false);
+   const [proveedorAEliminar, setProveedorAEliminar] = useState('');
+
   const handleGuardarCategoria = async () => {
     if (!nuevaCategoria.trim()) return;
     try {
@@ -79,6 +85,32 @@ function GestionCatalogo() {
       console.error('Error al crear el proveedor:', err);
     }
   };
+
+  const handleEliminarCategoria = async () => {
+     if (!categoriaAEliminar) return;
+     try {
+       // Aquí se llamará a catalogoService.js
+       // Ejemplo: await catalogoService.eliminarCategoria(categoriaAEliminar);
+       setCategorias((prev) => prev.filter((c) => String(c.id) !== categoriaAEliminar));
+       setCategoriaAEliminar('');
+       setMostrarFormEliminarCategoria(false);
+     } catch (err) {
+       console.error('Error al eliminar la categoría:', err);
+     }
+   };
+
+   const handleEliminarProveedor = async () => {
+     if (!proveedorAEliminar) return;
+     try {
+       // Aquí se llamará a catalogoService.js
+       // Ejemplo: await catalogoService.eliminarProveedor(proveedorAEliminar);
+       setProveedores((prev) => prev.filter((p) => String(p.id) !== proveedorAEliminar));
+       setProveedorAEliminar('');
+       setMostrarFormEliminarProveedor(false);
+     } catch (err) {
+       console.error('Error al eliminar el proveedor:', err);
+     }
+   };
 
   return (
     <Layout role="Encargado" title="Gestión de Catálogo" subtitle="Administra categorías y proveedores desde un solo lugar">
@@ -162,6 +194,50 @@ function GestionCatalogo() {
                 </div>
               )}
             </div>
+            <div className="catalogo-delete-section">
+               {!mostrarFormEliminarCategoria ? (
+                 <button
+                   className="catalogo-delete-toggle"
+                   onClick={() => setMostrarFormEliminarCategoria(true)}
+                 >
+                   <span className="catalogo-delete-icon">−</span>
+                   Eliminar categoría
+                 </button>
+               ) : (
+                 <div className="catalogo-add-form">
+                   <select
+                     className="catalogo-input"
+                     value={categoriaAEliminar}
+                     onChange={(e) => setCategoriaAEliminar(e.target.value)}
+                   >
+                     <option value="">Selecciona una categoría</option>
+                     {categorias.map((cat) => (
+                       <option key={cat.id} value={cat.id}>
+                         {cat.nombre}
+                       </option>
+                     ))}
+                   </select>
+                   <div className="catalogo-form-actions">
+                     <button
+                       className="catalogo-cancel-button"
+                       onClick={() => {
+                         setMostrarFormEliminarCategoria(false);
+                         setCategoriaAEliminar('');
+                       }}
+                     >
+                       Cancelar
+                     </button>
+                     <button
+                       className="catalogo-delete-confirm-button"
+                       onClick={handleEliminarCategoria}
+                       disabled={!categoriaAEliminar}
+                     >
+                       Eliminar
+                     </button>
+                   </div>
+                 </div>
+               )}
+             </div>
           </div>
 
           {/* Proveedores */}
@@ -254,6 +330,50 @@ function GestionCatalogo() {
                 </div>
               )}
             </div>
+            <div className="catalogo-delete-section">
+               {!mostrarFormEliminarProveedor ? (
+                 <button
+                   className="catalogo-delete-toggle"
+                   onClick={() => setMostrarFormEliminarProveedor(true)}
+                 >
+                   <span className="catalogo-delete-icon">−</span>
+                   Eliminar proveedor
+                 </button>
+               ) : (
+                 <div className="catalogo-add-form">
+                   <select
+                     className="catalogo-input"
+                     value={proveedorAEliminar}
+                     onChange={(e) => setProveedorAEliminar(e.target.value)}
+                   >
+                     <option value="">Selecciona un proveedor</option>
+                     {proveedores.map((prov) => (
+                       <option key={prov.id} value={prov.id}>
+                         {prov.nombre}
+                       </option>
+                     ))}
+                   </select>
+                   <div className="catalogo-form-actions">
+                     <button
+                       className="catalogo-cancel-button"
+                       onClick={() => {
+                         setMostrarFormEliminarProveedor(false);
+                         setProveedorAEliminar('');
+                       }}
+                     >
+                       Cancelar
+                     </button>
+                     <button
+                       className="catalogo-delete-confirm-button"
+                       onClick={handleEliminarProveedor}
+                       disabled={!proveedorAEliminar}
+                     >
+                       Eliminar
+                     </button>
+                   </div>
+                 </div>
+               )}
+             </div>
           </div>
         </section>
         </Layout>
