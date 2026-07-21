@@ -54,8 +54,7 @@ function AppRoutes() {
              <ProtectedRoute><ReabastecimientoInventario /></ProtectedRoute>
            } />
            <Route path="/catalogo" element={
-             <ProtectedRoute><GestionCatalogo /></ProtectedRoute>
-           } />
+             <ProtectedRoute rolesPermitidos={['Dueño']}><GestionCatalogo /></ProtectedRoute> } />
            <Route path="/historial-ventas" element={
              <ProtectedRoute><HistorialVentasDueno /></ProtectedRoute>
            } />

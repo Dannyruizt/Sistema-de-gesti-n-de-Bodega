@@ -1,20 +1,25 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from "../assets/Context/AuthContext";
-import logoAdmBodega from "../assets/logo.jpg";
+import { useAuth } from '../assets/Context/AuthContext';
+import logoAdmBodega from './logo.jpg';
 import '../Styles/componentes/Sidebar.css';
 
 function getNavLinks(rol) {
-   return [
-     { label: 'Dashboard', path: rol === 'Dueño' ? '/dashboard' : '/dashboard-encargado', icon: 'grid' },
-     { label: 'Resúmenes', path: rol === 'Dueño' ? '/panel' : '/panel-encargado', icon: 'bar-chart' },
-     { label: 'Gestión de productos', path: '/productos', icon: 'box' },
-     { label: 'Nueva venta', path: '/nueva-venta', icon: 'cart' },
-     { label: 'Historial de ventas', path: '/historial-ventas', icon: 'clock' },
-     { label: 'Reabastecimiento de inventario', path: '/reabastecimiento', icon: 'truck' },
-     { label: 'Gestión de catálogo', path: '/catalogo', icon: 'tag' },
-     { label: 'Alertas de caducidad', path: '/alertas', icon: 'alert', badge: 5 },
-   ];
- }
+  const links = [
+    { label: 'Dashboard', path: rol === 'Dueño' ? '/dashboard' : '/dashboard-encargado', icon: 'grid' },
+    { label: 'Resúmenes', path: rol === 'Dueño' ? '/panel' : '/panel-encargado', icon: 'bar-chart' },
+    { label: 'Gestión de productos', path: '/productos', icon: 'box' },
+    { label: 'Nueva venta', path: '/nueva-venta', icon: 'cart' },
+    { label: 'Historial de ventas', path: '/historial-ventas', icon: 'clock' },
+    { label: 'Reabastecimiento de inventario', path: '/reabastecimiento', icon: 'truck' },
+    { label: 'Alertas de caducidad', path: '/alertas', icon: 'alert', badge: 5 },
+  ];
+
+  if (rol === 'Dueño') {
+    links.splice(6, 0, { label: 'Gestión de catálogo', path: '/catalogo', icon: 'tag' });
+  }
+
+  return links;
+}
 
 function Icon({ type }) {
   const paths = {
@@ -34,12 +39,17 @@ function Icon({ type }) {
   );
 }
 
+const ETIQUETA_ROL = {
+  Dueño: 'Dueño',
+  Encargado: 'Encargado/Cajero',
+};
+
 function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { usuario, logout: cerrarSesion } = useAuth();
-   const rol = usuario?.rol || 'Encargado';
-   const navLinks = getNavLinks(rol);
+  const rol = usuario?.rol || 'Encargado';
+  const navLinks = getNavLinks(rol);
 
   const handleSalir = () => {
     cerrarSesion();
@@ -49,7 +59,7 @@ function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
-        <img src= {logoAdmBodega} alt="Logo ADM Bodega" className="sidebar-brand-logo" />
+        <img src={logoAdmBodega} alt="Logo ADM Bodega" className="sidebar-brand-logo" />
         <span className="sidebar-brand-text">ADM Bodega</span>
       </div>
 
@@ -62,13 +72,13 @@ function Sidebar() {
           >
             <Icon type={link.icon} />
             <span className="sidebar-link-label">{link.label}</span>
-            {link.badge && <span className="sidebar-badge-logo">{link.badge}</span>}
+            {link.badge && <span className="sidebar-badge">{link.badge}</span>}
           </button>
         ))}
       </nav>
 
       <div className="sidebar-footer">
-        <span className="sidebar-role-pill">{rol}</span>
+        <span className="sidebar-role-pill">{ETIQUETA_ROL[rol]}</span>
         <button className="sidebar-logout-button" onClick={handleSalir}>
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />

@@ -86,7 +86,7 @@ function Login() {
              value={formData.rol}
              onChange={handleChange}
            >
-             <option value="Encargado">Encargado</option>
+             <option value="Encargado">Encargado/Cajero</option>
              <option value="Dueño">Dueño</option>
            </select>
          </div>

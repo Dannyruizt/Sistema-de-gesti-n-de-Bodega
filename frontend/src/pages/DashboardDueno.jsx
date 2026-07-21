@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
 import '../styles/pages/DashboardDueno.css';
@@ -71,6 +72,7 @@ function StatIcon({ type }) {
 }
 
 function DashboardDueno() {
+  const navigate = useNavigate();
   const [datosDashboard, setDatosDashboard] = useState(null);
 
   useEffect(() => {
@@ -223,7 +225,9 @@ function DashboardDueno() {
 
           <div className="dueno-alerts-footer">
             <span>Mostrando {INVENTORY_ALERTS.length} productos con alerta</span>
-            <button className="dueno-link-button">Ver todos los productos →</button>
+            <button className="dueno-link-button" onClick={() => navigate('/alertas')}>
+               Ver todos los productos →
+             </button>
           </div>
         </section>
       </div>

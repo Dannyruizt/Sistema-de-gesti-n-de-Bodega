@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import '../styles/pages/DashboardEncargado.css';
 
@@ -35,6 +36,7 @@ function StatIcon({ type }) {
 }
 
 function DashboardEncargado() {
+  const navigate = useNavigate();
   //const [activeLink, setActiveLink] = useState('Dashboard');
 
   useEffect(() => {
@@ -92,12 +94,9 @@ function DashboardEncargado() {
 
         <div className="encargado-alerts-footer"> 
           {/* 3. Agregamos el onClick para redirigir a tu vista de productos */}
-          <button 
-            className="encargado-link-button" 
-            onClick={() => navigate('/productos')} // Cambia '/productos' por la ruta real que definiste en tus AppRoutes
-          >
-            Ver todos los productos →
-          </button> 
+           <button className="encargado-link-button" onClick={() => navigate('/inventario')}>
+               Ver todos los productos →
+            </button> 
         </div>
       </section> 
       </Layout>
